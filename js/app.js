@@ -23,6 +23,7 @@ window.onload = function() {
     elt.value = '';
     displayNotCompleted();
     activerCheckboxes();
+    activerItems();
   }
 
   function displayNotCompleted () {
@@ -32,6 +33,11 @@ window.onload = function() {
   function toggleItem (item) {
     item.classList.toggle('completed');
     displayNotCompleted();
+  }
+
+  function editItem(item) {
+    const value = item.querySelector('label').innerText;
+    item.querySelector('label').innerHTML = `<input type="text" value="${value}" />`;
   }
 
   newTodo.addEventListener('keyup', function(e) {
@@ -49,8 +55,19 @@ window.onload = function() {
     }
   }
 
+  function activerItems() {
+    const itemsNotCompleted = todoList.querySelectorAll('.listItem:not(.completed)');
+    for (let itemNotCompleted of itemsNotCompleted) {
+      itemNotCompleted.ondblclick = function () {
+        editItem(this);
+      }
+    }
+  }
+
+
 
   displayNotCompleted();
   activerCheckboxes();
+  activerItems();
 
 }
