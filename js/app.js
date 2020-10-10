@@ -2,6 +2,7 @@ window.onload = function() {
 
   const newTodo = document.querySelector('.new-todo');
   const todoList = document.querySelector('.todo-list');
+  const todoCountElt = document.getElementById('todo-count');
 
 
   function addItem(elt) {
@@ -18,6 +19,11 @@ window.onload = function() {
       todoList.childNodes[0].classList.remove('cache');
     });
     elt.value = '';
+    displayNotCompleted();
+  }
+
+  function displayNotCompleted () {
+      todoCountElt.innerText = todoList.querySelectorAll('li:not(.completed)').length;
   }
 
   newTodo.addEventListener('keyup', function(e) {
@@ -25,5 +31,7 @@ window.onload = function() {
       addItem(this);
     }
   });
+
+  displayNotCompleted();
 
 }
