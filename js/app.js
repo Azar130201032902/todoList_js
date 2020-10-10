@@ -5,6 +5,8 @@ window.onload = function() {
   const todoCountElt = document.getElementById('todo-count');
 
 
+
+
   function addItem(elt) {
     const newLi = document.createElement('li');
     newLi.classList.add('listItem');
@@ -20,10 +22,16 @@ window.onload = function() {
     });
     elt.value = '';
     displayNotCompleted();
+    activerCheckboxes();
   }
 
   function displayNotCompleted () {
       todoCountElt.innerText = todoList.querySelectorAll('li:not(.completed)').length;
+  }
+
+  function toggleItem (item) {
+    item.classList.toggle('completed');
+    displayNotCompleted();
   }
 
   newTodo.addEventListener('keyup', function(e) {
@@ -32,6 +40,17 @@ window.onload = function() {
     }
   });
 
+  function activerCheckboxes() {
+    const toggleInputs = document.querySelectorAll('.toggle');
+    for (let toggleInput of toggleInputs) {
+      toggleInput.onclick = function() {
+        toggleItem(this.closest('li'));
+      }
+    }
+  }
+
+
   displayNotCompleted();
+  activerCheckboxes();
 
 }
