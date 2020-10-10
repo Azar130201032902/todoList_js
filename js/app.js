@@ -37,7 +37,13 @@ window.onload = function() {
 
   function editItem(item) {
     const value = item.querySelector('label').innerText;
-    item.querySelector('label').innerHTML = `<input type="text" value="${value}" />`;
+    item.querySelector('label').innerHTML = `<input type="text" value="${value}" class="editInput" />`;
+    item.querySelector('label input').focus();
+    activerInputs();
+  }
+
+  function updateItem(item) {
+    item.querySelector('label').innerHTML = item.querySelector('label > input').value;
   }
 
   newTodo.addEventListener('keyup', function(e) {
@@ -56,13 +62,28 @@ window.onload = function() {
   }
 
   function activerItems() {
-    const itemsNotCompleted = todoList.querySelectorAll('.listItem:not(.completed)');
+    const itemsNotCompleted = todoList.querySelectorAll('.listItem:not(.completed) label');
     for (let itemNotCompleted of itemsNotCompleted) {
       itemNotCompleted.ondblclick = function () {
-        editItem(this);
+        editItem(this.closest('li'));
       }
     }
   }
+
+  function activerInputs() {
+    const editInputs = document.querySelectorAll('.editInput');
+    for (let editInput of editInputs) {
+      editInput.onkeyup = function(e) {
+        if (e.keyCode === 13) {
+          updateItem(this.closest('li'));
+        }
+      }
+      editInput.onblur = function() {
+        updateItem(this.closest('li'));
+      }
+    }
+  }
+
 
 
 
