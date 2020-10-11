@@ -121,6 +121,10 @@ window.onload = function() {
   const filterBtns = document.querySelectorAll('.filter');
   for (filterBtn of filterBtns) {
     filterBtn.onclick = function() {
+      filterBtns.forEach(function(filterLink) {
+        filterLink.classList.remove('selected');
+      });
+      this.classList.add('selected');
       filterItems(this);
     }
   }
