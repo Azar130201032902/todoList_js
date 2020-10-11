@@ -53,7 +53,14 @@ window.onload = function() {
       item.remove();
       displayNotCompleted();
     }, 300);
+  }
 
+  function filterItems(filterBtn) {
+    const filter = filterBtn.dataset.filter;
+   const items = document.querySelectorAll('.listItem');
+   for (let item of items) {
+     item.matches(filter)?item.classList.remove('cache'):item.classList.add('cache');
+   }
   }
 
 // Capture d'event
@@ -101,6 +108,13 @@ window.onload = function() {
       deleteBtn.onclick = function () {
         deleteItem(this.closest('li'));
       }
+    }
+  }
+
+  const filterBtns = document.querySelectorAll('.filter');
+  for (filterBtn of filterBtns) {
+    filterBtn.onclick = function() {
+      filterItems(this);
     }
   }
 
