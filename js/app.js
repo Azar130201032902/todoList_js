@@ -24,6 +24,7 @@ window.onload = function() {
     displayNotCompleted();
     activerCheckboxes();
     activerItems();
+    activerDeleteBtns();
   }
 
   function displayNotCompleted () {
@@ -46,6 +47,16 @@ window.onload = function() {
     item.querySelector('label').innerHTML = item.querySelector('label > input').value;
   }
 
+  function deleteItem(item) {
+    item.classList.add('cache');
+    setTimeout(function() {
+      item.remove();
+      displayNotCompleted();
+    }, 300);
+
+  }
+
+// Capture d'event
   newTodo.addEventListener('keyup', function(e) {
     if(e.keyCode == 13) {
       addItem(this);
@@ -84,11 +95,22 @@ window.onload = function() {
     }
   }
 
+  function activerDeleteBtns() {
+    const deleteBtns = document.querySelectorAll('.destroy');
+    for (deleteBtn of deleteBtns) {
+      deleteBtn.onclick = function () {
+        deleteItem(this.closest('li'));
+      }
+    }
+  }
 
 
 
+
+// Lancement des fonctions lors du chargement de la page
   displayNotCompleted();
   activerCheckboxes();
   activerItems();
+  activerDeleteBtns();
 
 }
