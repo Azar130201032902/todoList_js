@@ -63,6 +63,13 @@ window.onload = function() {
    }
   }
 
+  function deleteAllCompleted() {
+    const itemsCompleted = document.querySelectorAll('.completed');
+    for (let itemCompleted of itemsCompleted) {
+      deleteItem(itemCompleted);
+    }
+  }
+
 // Capture d'event
   newTodo.addEventListener('keyup', function(e) {
     if(e.keyCode == 13) {
@@ -118,7 +125,9 @@ window.onload = function() {
     }
   }
 
-
+  document.querySelector('.clear-completed').onclick = function() {
+    deleteAllCompleted(this);
+  }
 
 
 // Lancement des fonctions lors du chargement de la page
