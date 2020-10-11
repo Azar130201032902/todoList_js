@@ -72,7 +72,7 @@ window.onload = function() {
 
 // Capture d'event
   newTodo.addEventListener('keyup', function(e) {
-    if(e.keyCode == 13) {
+    if(e.keyCode == 13 && this.value.length > 0) {
       addItem(this);
     }
   });
